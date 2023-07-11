@@ -39,6 +39,6 @@ jobs:
           echo "Report path: ${{ steps.generate_report.outputs.json_report_path }}"
           JSON_FILE=${{ steps.generate_report.outputs.json_report_path }}
           MD_FILE="${JSON_FILE%.json}.md"
-          echo $MD_FILE
+          base64 $MD_FILE
           cat $MD_FILE
           
