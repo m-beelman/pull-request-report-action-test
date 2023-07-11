@@ -1,0 +1,44 @@
+name: Add Pull Request Report to PR when closed
+
+on:
+  pull_request:
+    # only run when PR is closed
+    types: [closed]
+
+permissions:
+  contents: read
+  checks: read
+  pull-requests: write
+  repository-projects: read
+  actions: read
+
+jobs:
+  add-pr-report-as-comment:
+    runs-on: ubuntu-latest
+    name: Generate report and add it as comment to the PR
+    steps:
+      # The versions of GitHub Actions should be pinned with the commit hash.
+      # Enable dependabot to keep this up to date.
+      - name: Checkout
+        uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab # v3.5.2
+      - name: Generate PR report
+        id: generate_report
+        uses: philips-software/pull-request-report-action@11d6ff4e2410d9949ae175f00c74e42291f253f6 # v0.1.1
+        with:
+          IncludeRawDataAsMarkdownComment: 'yes'
+          ReportTitle: 'My test PR title'
+          AddPrReportAsComment: 'no'
+        env:
+          GH_TOKEN: ${{ github.token }}
+      - name: Print Environment Variables
+        run: |
+          echo "GitHub Environment Variables:"
+          env | sort
+      - name: Print report path
+        run: |
+          echo "Report path: ${{ steps.generate_report.outputs.json_report_path }}"
+          JSON_FILE=${{ steps.generate_report.outputs.json_report_path }}
+          MD_FILE=$(JSON_FILE/.json/.md)
+          echo $MD_FILE
+          cat $MD_FILE
+          
