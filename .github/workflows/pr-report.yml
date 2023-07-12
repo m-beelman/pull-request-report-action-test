@@ -23,7 +23,7 @@ jobs:
         uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab # v3.5.2
       - name: Generate PR report
         id: generate_report
-        uses: philips-software/pull-request-report-action@c598feca78eaa5fff0f1f4adaf306242f41f4a8b
+        uses: philips-software/pull-request-report-action@c598feca78eaa5fff0f1f4adaf306242f41f4a8c
         with:
           IncludeRawDataAsMarkdownComment: 'yes'
           ReportTitle: 'My test PR title'
