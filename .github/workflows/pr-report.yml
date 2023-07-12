@@ -27,7 +27,6 @@ jobs:
         with:
           IncludeRawDataAsMarkdownComment: 'yes'
           ReportTitle: 'My test PR title'
-          AddPrReportAsComment: 'no'
         env:
           GH_TOKEN: ${{ github.token }}
       - name: Print Environment Variables
