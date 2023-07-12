@@ -41,4 +41,11 @@ jobs:
           MD_FILE="${JSON_FILE%.json}.md"
           base64 $MD_FILE
           cat $MD_FILE
-          
+      - name: 'Upload Artifact'
+        uses: actions/upload-artifact@v3
+        with:
+          name: Generated Data
+          path: |
+            *.md
+            *.json
+          retention-days: 1
